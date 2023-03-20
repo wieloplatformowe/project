@@ -33,6 +33,10 @@
 
 Aplikacja, dzięki której użytkownik nie zapomni o żadnym produkcie robiąc zakupy w sklepie. Użytkownik może zdefiniować własne produkty w aplikacji, te które najczęściej kupuje. Ważne, żeby aplikacja była praktyczna i umożliwiała w szybki sposób tworzenie takiej listy oraz żeby łatwo też można było zaznaczyć w sklepie te produkty, które już są w koszyku
 
+## :globe_with_meridians: Links ##
+
+Jira - https://shopping-list-wieloplatformowe.atlassian.net/
+
 ## :sparkles: Features ##
 
 <h4>Wymagania funkcjonalne:</h4> 
@@ -58,6 +62,7 @@ Aplikacja, dzięki której użytkownik nie zapomni o żadnym produkcie robiąc z
 The following tools were used in this project:
 
 - [GitHub](https://github.com/)
+- [Jira](https://www.atlassian.com/pl/software/jira)
 
 ## :white_check_mark: Requirements ##
 
