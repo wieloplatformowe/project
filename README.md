@@ -30,7 +30,6 @@
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a> &#xa0; | &#xa0;
   <a href="https://github.com/{{SURZEDOWSKI}}" target="_blank">Author</a>
 </p>
 
@@ -81,7 +80,7 @@ $ cd wieloplatformowe
 ```
 
 
-Made with :heart: by <a href="https://github.com/{{SURZEDOWSKI}}" target="_blank">{{YOUR_NAME}}</a>
+Made with :heart: by <a href="https://github.com/{{SURZEDOWSKI}}" target="_blank">SZYMON URZĘDOWSKI</a>
 
 &#xa0;
 
