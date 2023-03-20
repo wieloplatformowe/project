@@ -50,14 +50,14 @@ Aplikacja, dzięki której użytkownik nie zapomni o żadnym produkcie robiąc z
 :heavy_check_mark: Usuwanie produktów z koszyki i listy\
 :heavy_check_mark: Przenoszenie produktów z koszyka do listy (odznaczenie)\
 :heavy_check_mark: Przekładanie zakupów kolejnością\
-:heavy_check_mark: Dodać tytuł listy zakupów\
+:heavy_check_mark: Dodać tytuł listy zakupów
 
 <h4>Wymagania niefunkcjonalne:</h4>
 
 :heavy_check_mark: Aplikacja powinna działać zarówno na systemach Android jak i iOS\
 :heavy_check_mark: Aplikacja jest dostępna na nieograniczony czas\
 :heavy_check_mark: Interfejs aplikacji oraz jego komponenty są przejrzyste i czytelne\
-:heavy_check_mark: Aplikacja działa bez dostępu do internetu\
+:heavy_check_mark: Aplikacja działa bez dostępu do internetu
 
 ## :rocket: Technologies ##
 
@@ -73,7 +73,7 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) in
 
 ```bash
 # Clone this project
-$ git clone https://github.com/{{SURZEDOWSKI}}/wieloplatformowe
+$ git clone https://github.com/SURZEDOWSKI/wieloplatformowe
 
 # Access
 $ cd wieloplatformowe
