@@ -78,8 +78,8 @@ $ git clone https://github.com/{{SURZEDOWSKI}}/wieloplatformowe
 
 # Access
 $ cd wieloplatformowe
+```
 
-## :memo: License ##
 
 Made with :heart: by <a href="https://github.com/{{SURZEDOWSKI}}" target="_blank">{{YOUR_NAME}}</a>
 
