@@ -42,7 +42,7 @@ Aplikacja, dzięki której użytkownik nie zapomni o żadnym produkcie robiąc z
 
 ## :sparkles: Features ##
 
-Wymagania funkcjonalne: 
+<h4>Wymagania funkcjonalne:</h4> 
 
 :heavy_check_mark: Wyświetlenie listy zakupów\
 :heavy_check_mark: Dodawanie produktów do listy zakupów\
@@ -53,7 +53,7 @@ Wymagania funkcjonalne:
 :heavy_check_mark: Przekładanie zakupów kolejnością\
 :heavy_check_mark: Dodać tytuł listy zakupów\
 
-Wymagania niefunkcjonalne:
+<h4>Wymagania niefunkcjonalne:</h4>
 
 :heavy_check_mark: Aplikacja powinna działać zarówno na systemach Android jak i iOS\
 :heavy_check_mark: Aplikacja jest dostępna na nieograniczony czas\
