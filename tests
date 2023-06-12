@@ -1,0 +1,208 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'package:shopping_list_app/main.dart';
+ 
+class MockDatabase extends Mock implements Database {}
+ 
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+ 
+  group('ShoppingListApp', () {
+    late MockDatabase mockDatabase;
+ 
+    setUp(() {
+      mockDatabase = MockDatabase();
+    });
+ 
+    testWidgets('Renders ShoppingListApp', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: ShoppingListApp()));
+ 
+      expect(find.byType(MaterialApp), findsOneWidget);
+    });
+ 
+    testWidgets('Adds item to shopping list', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: ShoppingListApp()));
+      final addButton = find.byIcon(Icons.add);
+      await tester.tap(addButton);
+      await tester.pumpAndSettle();
+ 
+      final addItemButton = find.widgetWithText(TextButton, 'Dodaj');
+      final itemTextField = find.byType(TextField);
+      expect(addItemButton, findsOneWidget);
+      expect(itemTextField, findsOneWidget);
+ 
+      await tester.enterText(itemTextField, 'Item 1');
+      await tester.tap(addItemButton);
+      await tester.pumpAndSettle();
+ 
+      expect(find.text('Item 1'), findsOneWidget);
+    });
+ 
+    testWidgets('Removes item from shopping list', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: ShoppingListApp()));
+      final addButton = find.byIcon(Icons.add);
+      await tester.tap(addButton);
+      await tester.pumpAndSettle();
+ 
+      final addItemButton = find.widgetWithText(TextButton, 'Dodaj');
+      final itemTextField = find.byType(TextField);
+ 
+      await tester.enterText(itemTextField, 'Item 1');
+      await tester.tap(addItemButton);
+      await tester.pumpAndSettle();
+ 
+      final deleteButton = find.byIcon(Icons.delete);
+      await tester.tap(deleteButton);
+      await tester.pumpAndSettle();
+ 
+      expect(find.text('Item 1'), findsNothing);
+    });
+ 
+    testWidgets('Moves item in shopping list', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: ShoppingListApp()));
+      final addButton = find.byIcon(Icons.add);
+      await tester.tap(addButton);
+      await tester.pumpAndSettle();
+ 
+      final addItemButton = find.widgetWithText(TextButton, 'Dodaj');
+      final itemTextField = find.byType(TextField);
+ 
+      await tester.enterText(itemTextField, 'Item 1');
+      await tester.tap(addItemButton);
+      await tester.enterText(itemTextField, 'Item 2');
+      await tester.tap(addItemButton);
+      await tester.pumpAndSettle();
+ 
+      final reorderableList = find.byType(ReorderableListView);
+      final item1 = find.text('Item 1');
+      final item2 = find.text('Item 2');
+ 
+      expect(reorderableList, findsOneWidget);
+      expect(item1, findsOneWidget);
+      expect(item2, findsOneWidget);
+ 
+      await tester.longPress(item1);
+      await tester.drag(item1, Offset(0, 100));
+      await tester.pumpAndSettle();
+ 
+      final updatedItem1 = find.text('Item 1');
+      final updatedItem2 = find.text('Item 2');
+ 
+      expect(updatedItem1, findsOneWidget);
+      expect(updatedItem2, findsOneWidget);
+      expect(tester.widgetList<Widget>(reorderableList).first, updatedItem2);
+      expect(tester.widgetList<Widget>(reorderableList).last, updatedItem1);
+    });
+ 
+    testWidgets('Taps on cart tab', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: ShoppingListApp()));
+      final cartTab = find.widgetWithText(BottomNavigationBarItem, 'Koszyk');
+      await tester.tap(cartTab);
+      await tester.pumpAndSettle();
+ 
+      expect(find.text('Koszyk'), findsOneWidget);
+    });
+  });
+ 
+  group('NavigationWrapper', () {
+    late MockDatabase mockDatabase;
+ 
+    setUp(() {
+      mockDatabase = MockDatabase();
+    });
+ 
+    testWidgets('Renders NavigationWrapper', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: NavigationWrapper()));
+ 
+      expect(find.byType(NavigationWrapper), findsOneWidget);
+    });
+ 
+    testWidgets('Adds item to shopping list', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: NavigationWrapper()));
+ 
+      final addButton = find.byIcon(Icons.add);
+      await tester.tap(addButton);
+      await tester.pumpAndSettle();
+ 
+      final addItemButton = find.widgetWithText(TextButton, 'Dodaj');
+      final itemTextField = find.byType(TextField);
+ 
+      await tester.enterText(itemTextField, 'Item 1');
+      await tester.tap(addItemButton);
+      await tester.pumpAndSettle();
+ 
+      expect(find.text('Item 1'), findsOneWidget);
+    });
+ 
+    testWidgets('Removes item from shopping list', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: NavigationWrapper()));
+ 
+      final addButton = find.byIcon(Icons.add);
+      await tester.tap(addButton);
+      await tester.pumpAndSettle();
+ 
+      final addItemButton = find.widgetWithText(TextButton, 'Dodaj');
+      final itemTextField = find.byType(TextField);
+ 
+      await tester.enterText(itemTextField, 'Item 1');
+      await tester.tap(addItemButton);
+      await tester.pumpAndSettle();
+ 
+      final deleteButton = find.byIcon(Icons.delete);
+      await tester.tap(deleteButton);
+      await tester.pumpAndSettle();
+ 
+      expect(find.text('Item 1'), findsNothing);
+    });
+ 
+    testWidgets('Moves item in shopping list', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: NavigationWrapper()));
+ 
+      final addButton = find.byIcon(Icons.add);
+      await tester.tap(addButton);
+      await tester.pumpAndSettle();
+ 
+      final addItemButton = find.widgetWithText(TextButton, 'Dodaj');
+      final itemTextField = find.byType(TextField);
+ 
+      await tester.enterText(itemTextField, 'Item 1');
+      await tester.tap(addItemButton);
+      await tester.enterText(itemTextField, 'Item 2');
+      await tester.tap(addItemButton);
+      await tester.pumpAndSettle();
+ 
+      final reorderableList = find.byType(ReorderableListView);
+      final item1 = find.text('Item 1');
+      final item2 = find.text('Item 2');
+ 
+      expect(reorderableList, findsOneWidget);
+      expect(item1, findsOneWidget);
+      expect(item2, findsOneWidget);
+ 
+      await tester.longPress(item1);
+      await tester.drag(item1, Offset(0, 100));
+      await tester.pumpAndSettle();
+ 
+      final updatedItem1 = find.text('Item 1');
+      final updatedItem2 = find.text('Item 2');
+ 
+      expect(updatedItem1, findsOneWidget);
+      expect(updatedItem2, findsOneWidget);
+      expect(tester.widgetList<Widget>(reorderableList).first, updatedItem2);
+      expect(tester.widgetList<Widget>(reorderableList).last, updatedItem1);
+    });
+ 
+    testWidgets('Taps on cart tab', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: NavigationWrapper()));
+ 
+      final cartTab = find.widgetWithText(BottomNavigationBarItem, 'Koszyk');
+      await tester.tap(cartTab);
+      await tester.pumpAndSettle();
+ 
+      expect(find.text('Koszyk'), findsOneWidget);
+    });
+  });
+}
